@@ -1,0 +1,15 @@
+.footer {
+  background-color: rgb(72, 78, 85);
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.footer h6 {
+  margin-bottom: 0;
+}
