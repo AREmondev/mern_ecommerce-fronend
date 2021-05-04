@@ -14,6 +14,7 @@ import Shipping from './components/Shipping/Shipping'
 import Payment from './components/Payment/Payment'
 import PlaceOrder from './components/PlaceOrder/PlaceOrder'
 import Order from './components/Order/Order'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 function App() {
   return (
     <Provider store={store}>
@@ -35,21 +36,21 @@ function App() {
           <Route path="/signup">
             <SignUp />
           </Route>
-          <Route path="/profile">
+          <ProtectedRoute path="/profile">
             <Profile />
-          </Route>
-          <Route path="/shipping">
+          </ProtectedRoute>
+          <ProtectedRoute path="/shipping">
             <Shipping />
-          </Route>
-          <Route path="/payment">
+          </ProtectedRoute>
+          <ProtectedRoute path="/payment">
             <Payment />
-          </Route>
-          <Route path="/placeorder">
+          </ProtectedRoute>
+          <ProtectedRoute path="/placeorder">
             <PlaceOrder />
-          </Route>
-          <Route path="/order/:id">
+          </ProtectedRoute>
+          <ProtectedRoute path="/order/:id">
             <Order />
-          </Route>
+          </ProtectedRoute>
         </Switch>
 
         <Footer />

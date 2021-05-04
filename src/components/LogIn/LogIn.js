@@ -2,18 +2,27 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory, useLocation } from 'react-router-dom'
 import FormContainer from '../FormContainer/FormContainer'
 import { logIn } from '../../action/userAction.js'
 function LogIn() {
+  const history = useHistory()
+  const location = useLocation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const dispatch = useDispatch()
-  const userLogin = useSelector((state) => state.userLogin)
+  // const userLogin = useSelector((state) => state.userLogin)
+
+  let { from } = location.state || { from: { pathname: '/' } }
+
+  function redirectAuth(auth) {
+    history.push(auth)
+  }
 
   const handelLogIn = (e) => {
     e.preventDefault()
-    dispatch(logIn(email, password))
+    dispatch(logIn(email, password, redirectAuth, from))
   }
 
   return (

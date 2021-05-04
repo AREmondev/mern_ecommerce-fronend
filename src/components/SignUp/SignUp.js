@@ -1,22 +1,31 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../FormContainer/FormContainer'
 import { register } from '../../action/userAction.js'
 function SignUp() {
+  const history = useHistory()
+  const location = useLocation()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const userRegister = useSelector((state) => state.userRegister)
+  // const userRegister = useSelector((state) => state.userRegister)
+
+  let { from } = location.state || { from: { pathname: '/' } }
+
+  function redirectAuth(auth) {
+    history.push(auth)
+  }
 
   const dispatch = useDispatch()
   const handelSignUp = (e) => {
     e.preventDefault()
     if (password === confirmPassword) {
-      dispatch(register(name, email, password))
+      dispatch(register(name, email, password, redirectAuth, from))
     }
   }
 

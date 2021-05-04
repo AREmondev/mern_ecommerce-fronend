@@ -15,7 +15,9 @@ import {
   USER_UPDATE_PROFILE_FAIL,
 } from '../constants/userConstants.js'
 
-export const logIn = (email, password) => async (dispatch) => {
+export const logIn = (email, password, redirectAuth, from) => async (
+  dispatch,
+) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
     const config = { headers: { 'content-type': 'application/json' } }
@@ -25,7 +27,7 @@ export const logIn = (email, password) => async (dispatch) => {
       config,
     )
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
-
+    redirectAuth(from)
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({ type: USER_LOGIN_FAIL, payload: error })
@@ -38,7 +40,9 @@ export const logOut = () => async (dispatch) => {
   } catch (error) {}
 }
 
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (name, email, password, redirectAuth, from) => async (
+  dispatch,
+) => {
   try {
     dispatch({ type: USER_REGISTER_REQUEST })
     const config = { headers: { 'content-type': 'application/json' } }
@@ -49,7 +53,7 @@ export const register = (name, email, password) => async (dispatch) => {
     )
 
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data })
-
+    redirectAuth(from)
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
