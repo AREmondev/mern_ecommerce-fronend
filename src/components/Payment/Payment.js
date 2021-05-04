@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,9 +10,11 @@ function Payment() {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
   const { shippingAddress } = cart
-  if (!shippingAddress) {
-    history.push('/shipping')
-  }
+  useEffect(() => {
+    if (!shippingAddress) {
+      history.push('/shipping')
+    }
+  }, [shippingAddress, history])
   const [paymentMethods, setPaymentMethods] = useState('PayPal')
 
   const submitHandler = (e) => {

@@ -53,8 +53,9 @@ export const register = (name, email, password, redirectAuth, from) => async (
     )
 
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data })
+
+    dispatch({ type: USER_LOGIN_SUCCESS, payload: data }, redirectAuth(from))
     redirectAuth(from)
-    dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({ type: USER_REGISTER_FAIL, payload: error })
