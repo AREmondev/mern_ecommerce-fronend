@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import {
   Button,
   Card,
   Col,
   Container,
-  Form,
   Image,
   ListGroup,
   Row,
@@ -14,15 +13,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../FormContainer/FormContainer'
 import { createOrder } from '../../action/orderAction'
 import CheckOutSteps from '../CheckOutSteps/CheckOutSteps'
+import {
+  ORDER_CREATE_RESET,
+  ORDER_DETAILS_RESET,
+} from '../../constants/orderConstants'
 function PlaceOrder() {
   const history = useHistory()
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
+  const orderCreate = useSelector((state) => state.orderCreate)
   const { shippingAddress } = cart
-  //   const [address, setAddress] = useState(shippingAddress.address)
-  //   const [city, setCity] = useState(shippingAddress.city)
-  //   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode)
-  //   const [country, setCountry] = useState(shippingAddress.country)
+
+  const { success, order } = orderCreate
 
   cart.itemsPrice = cart.cartItems.reduce(
     (acc, item) => acc + item.price * item.qty,
@@ -48,12 +50,20 @@ function PlaceOrder() {
           totalPrice: cart.totalPrice,
         }),
       )
-    } catch (error) {
-      console.log('somossa', error)
-    }
+    } catch (error) {}
+
     // dispatch(saveShippingAddress({ address, city, postalCode, country }))
     // history.push('/payment')
   }
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`)
+      dispatch({ type: ORDER_DETAILS_RESET })
+      dispatch({ type: ORDER_CREATE_RESET })
+    }
+  }, [dispatch, success, history])
+
   return (
     <div style={{ padding: '10px 0 60px 0' }} className="place-order">
       <FormContainer>

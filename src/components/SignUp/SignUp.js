@@ -11,7 +11,7 @@ function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('')
 
   const userRegister = useSelector((state) => state.userRegister)
-  console.log(userRegister)
+
   const dispatch = useDispatch()
   const handelSignUp = (e) => {
     e.preventDefault()

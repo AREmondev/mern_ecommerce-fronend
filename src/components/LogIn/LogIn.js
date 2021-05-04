@@ -11,12 +11,9 @@ function LogIn() {
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
 
-  console.log(userLogin)
-
   const handelLogIn = (e) => {
     e.preventDefault()
     dispatch(logIn(email, password))
-    console.log('clicked')
   }
 
   return (

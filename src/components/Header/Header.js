@@ -4,11 +4,13 @@ import { Link, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import './Header.css'
 import { logOut } from '../../action/userAction'
+import { USER_DETAILS_RESET } from '../../constants/userConstants'
 function Header() {
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogIn)
   const { userInfo } = userLogin
   const handleLogOut = () => {
+    dispatch({ type: USER_DETAILS_RESET })
     dispatch(logOut())
   }
   return (

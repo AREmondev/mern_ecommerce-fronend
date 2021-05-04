@@ -24,10 +24,10 @@ function Cart() {
   const productId = id
   const query = useQuery()
   const qty = +query.get('qty')
-  console.log(id, qty)
+
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
-  console.log(cartItems)
+
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty))

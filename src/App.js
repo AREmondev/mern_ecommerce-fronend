@@ -13,6 +13,7 @@ import Profile from './components/Profile/Profile'
 import Shipping from './components/Shipping/Shipping'
 import Payment from './components/Payment/Payment'
 import PlaceOrder from './components/PlaceOrder/PlaceOrder'
+import Order from './components/Order/Order'
 function App() {
   return (
     <Provider store={store}>
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route path="/placeorder">
             <PlaceOrder />
+          </Route>
+          <Route path="/order/:id">
+            <Order />
           </Route>
         </Switch>
 

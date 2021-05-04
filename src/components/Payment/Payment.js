@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../FormContainer/FormContainer'
@@ -32,14 +32,6 @@ function Payment() {
             </Form.Group>
           </Col>
           <Col>
-            {/* <Form.Check
-              type="radio"
-              label="PayPal"
-              is="PayPal"
-              name="paymentMethods"
-              value="PayPal"
-              checked
-            ></Form.Check> */}
             <input
               className="mr-2"
               checked="checked"
