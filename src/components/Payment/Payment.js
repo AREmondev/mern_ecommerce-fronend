@@ -12,7 +12,14 @@ function Payment() {
   const { shippingAddress } = cart
   console.log(shippingAddress)
   useEffect(() => {
-    if (shippingAddress.address === '') {
+    if (
+      shippingAddress.address === '' ||
+      shippingAddress.address === undefined ||
+      shippingAddress.city === '' ||
+      shippingAddress.city === undefined ||
+      shippingAddress.postalCode === '' ||
+      shippingAddress.postalCode === undefined
+    ) {
       history.push('/shipping')
     }
   }, [shippingAddress, history])
