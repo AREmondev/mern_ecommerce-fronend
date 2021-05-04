@@ -10,8 +10,9 @@ function Payment() {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
   const { shippingAddress } = cart
+  console.log(shippingAddress)
   useEffect(() => {
-    if (!shippingAddress) {
+    if (shippingAddress.address === '') {
       history.push('/shipping')
     }
   }, [shippingAddress, history])
